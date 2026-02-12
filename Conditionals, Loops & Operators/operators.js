@@ -18,7 +18,7 @@ console.log(2**3); // 2 raised to the power 3
 x = 2;
 y = 10;
 x = x+y ;
-x += y; //x = x+y ; x += y; both are same 
+x += y; //x = x+y , x += y; both are same 
 x *= 2 ; // multiply 2 with x then assign 
 x /= 2 ; // divide 2 with x then assign 
 x %= 2 ; // module 2 with x then assign 
@@ -53,7 +53,7 @@ console.log(b===e); //will result in true because we changed type of d then save
 f = "1235da0" ;
 g = Number(f); // this will result in NaN because f is not a pure number string
 console.log(g); 
-console.log(isNaN(g)); // this will return true because g is NaN:not a number
+console.log(isNaN(g)); // this will return true because g is NaN(not a number)
 
 // how to convert number into string ?? 
 // use String()
@@ -100,8 +100,9 @@ console.log(null == 0);         //false
 console.log(null == true);      //false
 console.log(null == false);     //false
 
-// 2.) in expression that have comparison operator(< , >, >=, <=) null will be converted in number
-//     null --> number (0) amd undefined --> NaN
+// 2.) in expression that have comparison operator(< , >, >=, <=) null will
+//  be converted in number
+//     null --> number (0) and undefined --> NaN
 
 console.log(null >= 0); // will result in true because null will be converted in 0
 console.log(5 > null) // will result in true

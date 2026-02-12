@@ -50,7 +50,7 @@ console.log(aa&&bb);
 //if first value if false it will return first 1st value itself
 //if first value is true it will return 2nd value 
 
-//OR
+//  OR
 h = 10 ;
 j = 1 ;
 l = h||j ;

@@ -10,6 +10,7 @@ while (j < 5) {
     console.log("While loop iteration: " + j);
     j++;
 }
+
 // do...while loop
 let k = 0;
 do {
