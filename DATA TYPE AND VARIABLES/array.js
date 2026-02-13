@@ -69,4 +69,58 @@ console.log(myarr2);
 
 
 // merging array
+// const x = [12,15,1,12,41];
+// const y = [15,true ,false ,36,59];
+// const z = [15,62,95,"rohit" ,5];
 
+// // x.push(y);
+// // console.log(x); //will result in --> [ 12, 15, 1, 12, 41, [ 15, 15, 26, 36, 59 ] ]
+
+// const w = x.concat( y,z);
+// console.log(w);
+
+//spread operator ...variable
+// const x = [12,15,1,12,41];
+// const y = [15,true ,false ,36,59];
+// const z = [15,62,95,"rohit" ,5];
+// const w = [...x , ...y , ...z];
+// console.log(w);
+
+
+const names = ["aayush" , "raj" , "aman" ,"raj"];
+console.log(names.toString());
+
+//join()
+console.log(names.join(" "));
+
+//indexOf : reutrns the index of first time an item appear in an array
+console.log(names.indexOf("raj")); //gives index value if exists otherwise -1
+
+//lastIndexOf : raturns the index of the last time an item appears
+console.log(names.lastIndexOf("raj"));
+
+//includes : checks if an element exists in array
+console.log(names.includes("aman")); 
+
+//sort
+console.log(names.sort()); //names are sorted on the basis of ascii table
+
+//reverse
+console.log(names.reverse()); 
+
+const a = [101 , 22 , 35 , 45];
+console.log(a.sort()); //will result in [ 101, 22, 35, 45 ] , why? being treated as string
+//solution
+console.log(a.sort((a,b)=> a-b)); // this will sort this array
+//desending order
+console.log(a.sort((a,b)=> b-a));
+
+const ary = [25,26,24,[15,45,[56,25,45],95,52] ,45];
+console.log(ary[3]); // this will result in [15,45,95,52] ,how to access single element
+console.log(ary[3][1]); // now we can access single element 
+console.log(ary[3][2][0]);
+
+//flat 
+console.log(ary.flat()); // this will flat array on a single level ,how
+//  to flat array on multiple levels ? use flat(infinity)
+console.log(ary.flat(Infinity));
