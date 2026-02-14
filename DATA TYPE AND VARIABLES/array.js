@@ -124,3 +124,9 @@ console.log(ary[3][2][0]);
 console.log(ary.flat()); // this will flat array on a single level ,how
 //  to flat array on multiple levels ? use flat(infinity)
 console.log(ary.flat(Infinity));
+
+
+//destructuring of array
+const arr = [25,15,26,35,5];
+const[first , second] = arr ;
+console.log(first ,second);
