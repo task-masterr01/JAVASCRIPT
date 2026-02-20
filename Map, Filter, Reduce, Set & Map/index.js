@@ -52,7 +52,9 @@ const newArr3 = arr3.map((num)=>num*2);
 console.log(newArr3);
 
 
-//reducer
+//reduce
+
+
 
 
 
