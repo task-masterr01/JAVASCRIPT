@@ -90,6 +90,35 @@ ul.append(newBtn); // adds at the end of node (inside)
 //  node.remove() // removes the node 
 newBtn.remove();
 
+const newEl = document.createElement("h3");
+newEl.textContent = "added text content using dom";
+newEl.id = "newID";
+newEl.className = "textData" ;
+newEl.className = " docData" ; //we can add multiple claases but we have to add space before other classes
+
+// OR  use classList.add()
+newEl.classList.add("textData2") ;
+newEl.classList.add("docData2") ;
+
+// remove class using classList.remove()
+newEl.classList.remove("docData2") ;
+
+
+// fragment 
+const arr = ["milk" , "tea" , "samosa" , "paneer", "chaat"];
+
+const unorderedList = document.getElementById("list");
+const fragment = document.createDocumentFragment();
+ 
+for(let food of arr){
+    const list  = document.createElement("li");
+    list.textContent = food ;
+    fragment.append(list);
+}
+unorderedList.append(fragment);
+
+
+
 
 
 
