@@ -15,7 +15,8 @@
     element.textContent = "text data has been changed";
  })
  element.addEventListener("click" , ()=>{
+   
     element.style.backgroundColor = "brown";
  })
- // we can add multiple event listner's using addEventListner
+ // we can add multiple event listner's using addEventListner 
  
