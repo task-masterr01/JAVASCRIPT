@@ -7,6 +7,7 @@
 // const element = document.getElementById("first");
 // element.onclick = function handleClick(){
 //     element.textContent = "text data have been changed";
+// 
 // }
 
 // instead we can use addEventListner()
