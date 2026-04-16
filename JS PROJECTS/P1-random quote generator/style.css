@@ -1,0 +1,9 @@
+#first{
+    width: 80%;
+}
+button{
+    padding: 10px;
+    font: 500 18px solid black;
+    border-radius: 15px;
+    background-color: rgb(240, 252, 9);
+}

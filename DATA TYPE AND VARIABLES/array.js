@@ -30,10 +30,10 @@ console.log(arr);
 arr.pop();
 console.log(arr);
 
-//add element at first index and delete element at first place
+//add element at first index and 
 arr.unshift("rohit sain");
 console.log(arr);
-//deleting first element
+//delete first element
 arr.shift();
 console.log(arr);
 
@@ -96,7 +96,7 @@ console.log(names.join(" "));
 //indexOf : reutrns the index of first time an item appear in an array
 console.log(names.indexOf("raj")); //gives index value if exists otherwise -1
 
-//lastIndexOf : raturns the index of the last time an item appears
+//lastIndexOf : returns the index of the last time an item appears
 console.log(names.lastIndexOf("raj"));
 
 //includes : checks if an element exists in array
