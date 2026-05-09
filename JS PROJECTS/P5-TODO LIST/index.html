@@ -33,10 +33,48 @@
             <h1>
                 you've got <span class="task-count" id="task-count">0</span> task today
                 <button class="add-btn" onclick="openmodal()">
-                    <i class="ri-add-line"></i>
-                    
+                    <i class="ri-add-line"></i> Add new 
+
                 </button>
             </h1>
+        </div>
+    </div>
+    <div class="section">
+        <div class="section-header"> <h2>on hold</h2> </div>
+            
+            <div id="onHoldTasks">
+                <div class="task-item">
+                    <div class="task-checkbox " onclick="toggleTask()"></div>
+                    <div class="task-content">
+                        <div class="task-title " >Cooking something</div>
+                    </div>
+                    <span class="status-badge status-pending"></span>
+                    <div class="priority-badge priority-something">
+                        <i class="ri-checkbox-blank-circle-fill"></i>
+                    </div>
+                    <div class="avatar">CF</div>
+                    <button class="icon-btn" style="width: 30px; height: 30px;" onclick="editTask()">
+                        <i class="ri-pencil-fill" style="font-size: 12px;"></i>
+                    </button>
+                    <button class="icon-btn" style="width: 30px; height: 30px;" onclick="deleteTask()">
+                        <i class="ri-delete-bin-fill" style="font-size: 12px;"></i>
+                    </button>
+                </div>
+            </div>
+        
+    </div>
+    <div class="section">
+        <div class="section-header">
+            <h2>completed</h2>
+            <div id="completedTasks"></div>
+            
+        </div>
+    </div>
+    <div class="section">
+        <div class="section-header">
+            <h2>incompleted</h2>
+            <span class="badge badgeInactive">Inactive</span>
+            <div id="incompleteTasks"></div>
         </div>
     </div>
    </div> 
