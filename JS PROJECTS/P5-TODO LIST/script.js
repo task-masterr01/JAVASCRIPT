@@ -46,29 +46,120 @@ function updateGreeting() {
 }
 
 function saveData () {
-    
+    localStorage.setItem("xyz" , JSON.stringify(tasks))
 }
 
+function renderTasks() {
+    const onHold = tasks.filter((t)=> !t.completed)
+    const completed = tasks.filter((t)=> t.completed)
+
+
+    document.getElementById("onHoldTasks").innerHTML = onHold.length ? onHold.map((t) => 
+         `
+            <div class="task-item">
+                            <div class="task-checkbox ${t.completed ? "completed" : "" }" onclick="toggleTask(${t.id})"></div>
+                            <div class="task-content">
+                                <div class="task-title  ${t.completed ? "completed" : "" }" >${t.title}</div>
+                            </div>
+                            <span class="status-badge status-${t.status}">
+                                ${
+                                    t.status === "progress"
+                                     ? "in progress" 
+                                     : t.status.charAt(0).toUpperCase() 
+                                     + t.status.slice(1)
+                                }
+                            </span>
+                            <div class="priority-badge priority-${t.priority}">
+                                <i class="ri-checkbox-blank-circle-fill"></i>${t.priority.chaeAt(0).toUpperCase() + t.priority.slice(1)}
+                            </div>
+                            <div class="avatar">CF</div>
+                            <button class="icon-btn" style="width: 30px; height: 30px;" onclick="editTask()">
+                                <i class="ri-pencil-fill" style="font-size: 12px;"></i>
+                            </button>
+                            <button class="icon-btn" style="width: 30px; height: 30px;" onclick="deleteTask()">
+                                <i class="ri-delete-bin-fill" style="font-size: 12px;"></i>
+                            </button>
+                        </div>
+        `).join("")
+        : ' <p style="color: #9ca3af; padding: 25px;">No task on hold</p>' ;
+
+        document.getElementById("completedTasks").innerHTML = completed.length ? completed.map((t) =>{
+            `
+                <div class="task-item">
+                            <div class="task-checkbox completed" onclick="toggleTask(${t.id})"></div>
+                            <div class="task-content">
+                                <div class="task-title completed" >${t.title}</div>
+                            </div>
+                            <span class="status-badge status-completed > completed</span>
+                            <div class="priority-badge priority-${t.priority}">
+                                <i class="ri-checkbox-blank-circle-fill"></i>${t.priority.chaeAt(0).toUpperCase() + t.priority.slice(1)}
+                            </div>
+                            <div class="avatar">CF</div>
+                            <button class="icon-btn" style="width: 30px; height: 30px;" onclick="editTask()">
+                                <i class="ri-pencil-fill" style="font-size: 12px;"></i>
+                            </button>
+                            <button class="icon-btn" style="width: 30px; height: 30px;" onclick="deleteTask()">
+                                <i class="ri-delete-bin-fill" style="font-size: 12px;"></i>
+                            </button>
+                        </div>
+            `
+        }).join("")
+        : ' <p style="color: #9ca3af; padding: 25px;">No completed tasks</p>' ; 
+
+        const total = tasks.length;
+        const completedCount = tasks.filter((t) => t.completed).length ;
+        const pendingCount = total - completedCount ;
+        const rate = total ? Math.round((completedCount / total) * 100) : 0 ;
+
+        document.getElementById("taskCount").textContent = pending ;
+        document.getElementById("totaltasks").textContent = pending ;
+        document.getElementById("completedCount").textContent = completedCount ;
+        document.getElementById("pendingCount").textContent = ;
+        document.getElementById("completionRateValue").textContent = rate + "%" ;
+        document.getElementById("totalProgress").textContent = rate + "%" ;
+        document.getElementById("completionProgress").style.width = rate + "%" ;
+        saveData()
+}
+
+function toggleTask(id) {
+    const t = tasks.find((t) => t.id === id );
+    if (t) {
+        t.completed = !completed ;
+        t.status  = t.completed ? "completed" : "pending" ;
+        renderTasks() ;     
+    }
+}
+
+function deleteTask(id) {
+    if( confirm("Are you sure uu want to delete this task ?")){
+        tasks = tasks.filter((t) => t.id !== id);
+        renderTasks;
+    }
+}
+function openModal() {
+    document.getElementById(taskModal).classList.add("active")
+}
+function closeModal() {
+    document.getElementById(taskModal).classList.remove("active") ;
+    document.getElementById('taskForm').reset() ;
+    editingId = null ;
+}
+
+document.getElementById("taskForm").addEventListener("submit" , (e)=>{
+    e.preventDefault();
+    const title = document.getElementById("taskTitle").value ;
+    const status = document.getElementById("taskStatus").value ;
+    const priority = document.getElementById("taskPriority").value ;
+
+    if (editingId) {
+        const t = tasks.find((t) => t.id === editingId) ;
+        t.title = title ;
+        t.status = status ;
+        t.priority = priority ;
+        t.completed = status === 'completed'
+    }
+})
 
 
 
 
-const taskCard = `
-    <div class="task-item">
-                    <div class="task-checkbox " onclick="toggleTask()"></div>
-                    <div class="task-content">
-                        <div class="task-title " >Cooking something</div>
-                    </div>
-                    <span class="status-badge status-pending"></span>
-                    <div class="priority-badge priority-something">
-                        <i class="ri-checkbox-blank-circle-fill"></i>
-                    </div>
-                    <div class="avatar">CF</div>
-                    <button class="icon-btn" style="width: 30px; height: 30px;" onclick="editTask()">
-                        <i class="ri-pencil-fill" style="font-size: 12px;"></i>
-                    </button>
-                    <button class="icon-btn" style="width: 30px; height: 30px;" onclick="deleteTask()">
-                        <i class="ri-delete-bin-fill" style="font-size: 12px;"></i>
-                    </button>
-                </div>
-`
