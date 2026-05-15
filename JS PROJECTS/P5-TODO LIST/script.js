@@ -1,37 +1,43 @@
 let tasks = [];
 let editingId = null;
 function loadData() {
-    tasks = [
-        {
-            id : 1 ,
-            title : "eveluate the adddition and deletion of task",
-            status : "pending" ,
-            priority : "critical" ,
-            completed : false,
+    const saved = (localStorage.getItem('jsModal'));
+    if (saved) tasks = JSON.parse(saved);
+    else{
+    tasks = 
+        [
+            {
+                id : 1 ,
+                title : "evaluate the adddition and deletion of task",
+                status : "pending" ,
+                priority : "critical" ,
+                completed : false,
 
-        },
-        {
-            id : 2,
-            title : "identify the implementation team",
-            status : "progress" ,
-            priority : "minor" ,
-            completed : false,
-        },
-        {
-            id : 3,
-            title : "batch schedule download/progress",
-            status : "pending" ,
-            priority : "critical" ,
-            completed : false,
-        },
-        {
-            id : 4,
-            title : "monitor system performance and adjust hardware",
-            status : "pending" ,
-            priority : "minor" ,
-            completed : false,
-        }
-    ];
+            },
+            {
+                id : 2,
+                title : "identify the implementation team",
+                status : "progress" ,
+                priority : "minor" ,
+                completed : false,
+            },
+            {
+                id : 3,
+                title : "batch schedule download/progress",
+                status : "pending" ,
+                priority : "critical" ,
+                completed : false,
+            },
+            {
+                id : 4,
+                title : "monitor system performance and adjust hardware",
+                status : "pending" ,
+                priority : "minor" ,
+                completed : true,
+            }
+        ];
+    }
+
     updateGreeting();
     renderTasks();   
 }
@@ -46,16 +52,17 @@ function updateGreeting() {
 }
 
 function saveData () {
-    localStorage.setItem("xyz" , JSON.stringify(tasks))
+    localStorage.setItem("jsModal", JSON.stringify(tasks))
 }
+
 
 function renderTasks() {
     const onHold = tasks.filter((t)=> !t.completed)
     const completed = tasks.filter((t)=> t.completed)
 
 
-    document.getElementById("onHoldTasks").innerHTML = onHold.length ? onHold.map((t) => 
-         `
+    document.getElementById("onHoldTasks").innerHTML = onHold.length ? onHold.map((t) => { 
+        return`
             <div class="task-item">
                             <div class="task-checkbox ${t.completed ? "completed" : "" }" onclick="toggleTask(${t.id})"></div>
                             <div class="task-content">
@@ -70,53 +77,56 @@ function renderTasks() {
                                 }
                             </span>
                             <div class="priority-badge priority-${t.priority}">
-                                <i class="ri-checkbox-blank-circle-fill"></i>${t.priority.chaeAt(0).toUpperCase() + t.priority.slice(1)}
+                                <i class="ri-checkbox-blank-circle-fill"></i>${t.priority.charAt(0).toUpperCase() + t.priority.slice(1)}
                             </div>
                             <div class="avatar">CF</div>
-                            <button class="icon-btn" style="width: 30px; height: 30px;" onclick="editTask()">
+                            <button class="icon-btn" style="width: 30px; height: 30px;" onclick="editTask(${t.id})">
                                 <i class="ri-pencil-fill" style="font-size: 12px;"></i>
                             </button>
-                            <button class="icon-btn" style="width: 30px; height: 30px;" onclick="deleteTask()">
+                            <button class="icon-btn" style="width: 30px; height: 30px;" onclick="deleteTask(${t.id})">
                                 <i class="ri-delete-bin-fill" style="font-size: 12px;"></i>
                             </button>
                         </div>
-        `).join("")
+                            
+                ` }).join("")
         : ' <p style="color: #9ca3af; padding: 25px;">No task on hold</p>' ;
 
-        document.getElementById("completedTasks").innerHTML = completed.length ? completed.map((t) =>{
-            `
+        document.getElementById("completedTasks").innerHTML = completed.length ? completed.map((t) =>{ 
+            return`
                 <div class="task-item">
                             <div class="task-checkbox completed" onclick="toggleTask(${t.id})"></div>
                             <div class="task-content">
                                 <div class="task-title completed" >${t.title}</div>
                             </div>
-                            <span class="status-badge status-completed > completed</span>
+                            <span class="status-badge status-completed" >completed</span>
+                            <div class= "badges">
                             <div class="priority-badge priority-${t.priority}">
-                                <i class="ri-checkbox-blank-circle-fill"></i>${t.priority.chaeAt(0).toUpperCase() + t.priority.slice(1)}
+                                <i class="ri-checkbox-blank-circle-fill"></i>${t.priority.charAt(0).toUpperCase() + t.priority.slice(1)}
                             </div>
                             <div class="avatar">CF</div>
-                            <button class="icon-btn" style="width: 30px; height: 30px;" onclick="editTask()">
+                            <button class="icon-btn" style="width: 30px; height: 30px;" onclick="editTask(${t.id})">
                                 <i class="ri-pencil-fill" style="font-size: 12px;"></i>
                             </button>
-                            <button class="icon-btn" style="width: 30px; height: 30px;" onclick="deleteTask()">
+                            <button class="icon-btn" style="width: 30px; height: 30px;" onclick="deleteTask(${t.id})">
                                 <i class="ri-delete-bin-fill" style="font-size: 12px;"></i>
                             </button>
-                        </div>
+                            </div>
+                 </div>
             `
         }).join("")
         : ' <p style="color: #9ca3af; padding: 25px;">No completed tasks</p>' ; 
 
         const total = tasks.length;
         const completedCount = tasks.filter((t) => t.completed).length ;
-        const pendingCount = total - completedCount ;
+        const pending = total - completedCount ;
         const rate = total ? Math.round((completedCount / total) * 100) : 0 ;
 
-        document.getElementById("taskCount").textContent = pending ;
-        document.getElementById("totaltasks").textContent = pending ;
+        document.getElementById("task-count").textContent = total ;
+        document.getElementById("totalTasks").textContent = total ;
         document.getElementById("completedCount").textContent = completedCount ;
-        document.getElementById("pendingCount").textContent = ;
+        document.getElementById("pendingCount").textContent = pending ;
         document.getElementById("completionRateValue").textContent = rate + "%" ;
-        document.getElementById("totalProgress").textContent = rate + "%" ;
+        document.getElementById("totalProgress").style.width = rate + "%" ;
         document.getElementById("completionProgress").style.width = rate + "%" ;
         saveData()
 }
@@ -124,7 +134,7 @@ function renderTasks() {
 function toggleTask(id) {
     const t = tasks.find((t) => t.id === id );
     if (t) {
-        t.completed = !completed ;
+        t.completed = !t.completed;
         t.status  = t.completed ? "completed" : "pending" ;
         renderTasks() ;     
     }
@@ -133,14 +143,14 @@ function toggleTask(id) {
 function deleteTask(id) {
     if( confirm("Are you sure uu want to delete this task ?")){
         tasks = tasks.filter((t) => t.id !== id);
-        renderTasks;
+        renderTasks();
     }
 }
 function openModal() {
-    document.getElementById(taskModal).classList.add("active")
+    document.getElementById("taskModal").classList.add("active")
 }
 function closeModal() {
-    document.getElementById(taskModal).classList.remove("active") ;
+    document.getElementById("taskModal").classList.remove("active") ;
     document.getElementById('taskForm').reset() ;
     editingId = null ;
 }
@@ -157,8 +167,34 @@ document.getElementById("taskForm").addEventListener("submit" , (e)=>{
         t.status = status ;
         t.priority = priority ;
         t.completed = status === 'completed'
+    }else {
+        tasks.push({
+            id: Date.now(),
+            title,
+            status,
+            priority,
+            completed : status === "completed"
+        })
     }
+
+    renderTasks();
+    closeModal();
 })
+
+function editTask(id) {
+    editingId = id ;
+    const t = tasks.find((t)=> t.id === id);
+    if(t){
+        document.getElementById("taskTitle").value = t.title;
+        document.getElementById("taskStatus").value = t.status;
+        document.getElementById("taskPriority").value = t.priority;
+        openModal();
+    }
+}
+
+loadData();
+
+
 
 
 

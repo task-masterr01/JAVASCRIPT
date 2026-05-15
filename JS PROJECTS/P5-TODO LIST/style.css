@@ -339,6 +339,12 @@ html,body{
     border-radius: 10px;
     transition: 0.3 all ease;
 }
+.badges{
+    display: flex;
+    gap: 20px;
+    justify-content: space-evenly;
+    
+}
 
 .modal {
     display: none;
