@@ -47,6 +47,15 @@ html,body{
 
     --box-shadow: 0 2rem 3rem var(--color-light)
 }
+/* ======  DARK THEME VARIBALES ======== */
+.dark-theme-variables {
+    --color-background: #181a1e;
+    --color-white:#202528;
+    --color-dark:#edeffd;
+    --color-dark-variant: #a3bdcc;
+    --color-light: rgba(0 , 0 , 0 , 0.4);
+    --color-box-shadow: 0 2rem 3rem var(--color-light);
+}
 .container {
     display: grid;
     width: 96%;
@@ -115,6 +124,7 @@ b {
 
 aside {
     height: 100vh;
+    
 }
 aside .top{
     display: flex;
@@ -139,7 +149,7 @@ aside .close{
 /* <============  SIDEBAR  ===============> */
 
 aside .sidebar{
-    background: white;
+    background: var(--color-background);
     display: flex;
     flex-direction: column;
     height: 86vh;
@@ -552,7 +562,7 @@ main a{
     }
     aside {
         position: fixed;
-        left: 0;
+        left: -100%;
         background: var(--color-white);
         width: 18rem;
         z-index: 3;
@@ -560,12 +570,21 @@ main a{
         height: 100%;
         padding-right: var(--card-padding);
         display: none;
+        animation: showMenu 0.4s ease forwards;
+    }
+    @keyframes showMenu{
+        to {
+            left: 0;
+        }
+    }
+    aside .top{
+        justify-content: space-between;
     }
     aside .logo{
         margin-left: 1rem;  
     }
     aside .logo h2{
-        display: inline;
+        display: none;
     }
     aside .sidebar h3{
         display: inline;
