@@ -5,3 +5,5 @@ parent.addEventListener('click', (e)=>{
     const body = document.querySelector('body');
     body.style.backgroundColor = child.id ;
 })
+
+    // Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore voluptates exercitationem commodi?
