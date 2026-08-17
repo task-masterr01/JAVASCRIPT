@@ -6,4 +6,4 @@ parent.addEventListener('click', (e)=>{
     body.style.backgroundColor = child.id ;
 })
 
-    // Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore voluptates exercitationem commodi?
+  
